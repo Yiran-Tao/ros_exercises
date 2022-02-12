@@ -8,9 +8,10 @@ from ros_exercises.msg import OpenSpace
 
     
 def callback(data):
+    publisher_topic = rospy.get_param('publisher topic', 'open_space')    
     # pub1 = rospy.Publisher('open_space/distance', Float32, queue_size=10)
     # pub2 = rospy.Publisher('open_space/angle', Float32, queue_size=10)
-    pub = rospy.Publisher('open_space', OpenSpace, queue_size=10)
+    pub = rospy.Publisher(publisher_topic, OpenSpace, queue_size=10)
     rate = rospy.Rate(20) 
    
     ranges = data.ranges
@@ -35,9 +36,10 @@ def callback(data):
 def listener():
 
     rospy.init_node('open_space_publisher')
-       
+    
+    subscriber_topic = rospy.get_param('subscriber topic', 'fake_scan')    
 
-    rospy.Subscriber('fake_scan', LaserScan, callback)
+    rospy.Subscriber(subscriber_topic, LaserScan, callback)
 
     rospy.spin()
 
