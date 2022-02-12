@@ -40,8 +40,7 @@ if __name__ == '__main__':
         sts2.transform.rotation.z = quaternion_from_matrix(right_base)[2]
         sts2.transform.rotation.w = quaternion_from_matrix(right_base)[3]
 
-        broadcaster.sendTransform(sts1)
-        broadcaster.sendTransform(sts2)
+        broadcaster.sendTransform([sts1,sts2])
         
         
         rospy.spin()
